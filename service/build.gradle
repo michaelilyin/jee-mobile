@@ -14,11 +14,11 @@ sourceSets {
     }
 }
 
-integrationTest {
+//integrationTest {
 //    jvmArgs '-XX:MaxPermSize=256m'
-//   environment 'JBOSS_HOME', rootProject.jbossHome
+//    environment 'JBOSS_HOME', rootProject.jbossHome
 //    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
-}
+//}
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
