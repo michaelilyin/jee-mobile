@@ -1,0 +1,29 @@
+#sudo: required
+dist: trusty
+language: java
+jdk:
+  - oraclejdk8
+
+services:
+  - docker
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+script:
+  - ./gradlew clean build
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+#  - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./gradlew :client:deployGhPages; fi
+#  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  
+  #TAG
+#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  #CLIENT
+#  - export CLIENT=michaelilyin/blog-client
+#  - docker build -t $CLIENT:$COMMIT ./client
+#  - docker tag $CLIENT:$COMMIT $CLIENT:$TAG
+#  - docker push $CLIENT
