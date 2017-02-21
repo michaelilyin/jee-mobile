@@ -7,9 +7,9 @@ jdk:
 #services:
 #  - docker
 
-env:
-  global:
-    - COMMIT=${TRAVIS_COMMIT::7}
+#env:
+#  global:
+#    - COMMIT=${TRAVIS_COMMIT::7}
 
 script:
   - ./gradlew clean build
