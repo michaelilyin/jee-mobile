@@ -1,0 +1,36 @@
+apply plugin: 'kotlin'
+apply plugin: 'war'
+
+ext.jbossHome = hasProperty('jbossHome') ? jbossHome : "${rootDir}/wildfly-10.1.0.Final"
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/it/kotlin')
+        }
+        resources.srcDir file('src/it/resources')
+    }
+}
+
+test {
+    jvmArgs '-XX:MaxPermSize=256m'
+    environment 'JBOSS_HOME', rootProject.jbossHome
+    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "javax:javaee-api:7.0"
+    compile "org.liquibase:liquibase-core:3.5.3"
+    compile project(":api")
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
