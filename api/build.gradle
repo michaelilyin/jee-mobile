@@ -1,6 +1,6 @@
 apply plugin: 'kotlin'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly "javax:javaee-api:7.0"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compileOnly "javax:javaee-api:$javaeeApiVersion"
 }

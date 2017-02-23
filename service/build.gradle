@@ -1,36 +1,65 @@
+plugins {
+    id "de.undercouch.download" version "3.2.0"
+}
+
 apply plugin: 'kotlin'
 apply plugin: 'war'
 
-//ext.jbossHome = hasProperty('jbossHome') ? jbossHome : "${rootDir}/wildfly-10.1.0.Final"
+ext.wildflyVersion = "10.1.0.Final"
+ext.wildflyName = "wildfly-${project.wildflyVersion}.zip"
 
 sourceSets {
-    integrationTest {
+    integTest {
         java {
-            compileClasspath += main.output + test.output
-            runtimeClasspath += main.output + test.output
-            srcDir file('src/it/kotlin')
+            compileClasspath += main.output + main.compileClasspath //+ main.runtimeClasspath
+            runtimeClasspath += main.output + main.compileClasspath // + test.output
+            srcDir file('src/integTest/kotlin')
         }
-        resources.srcDir file('src/it/resources')
+        resources.srcDir file('src/integTest/resources')
     }
 }
 
-//integrationTest {
-//    jvmArgs '-XX:MaxPermSize=256m'
-//    environment 'JBOSS_HOME', rootProject.jbossHome
-//    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
-//}
+repositories {
+    maven { url 'https://repository.jboss.org/nexus/content/groups/public-jboss' }
+    maven { url 'https://repository.jboss.org/nexus/content/repositories' }
+    maven { url 'https://repository.jboss.org/nexus/content/repositories/thirdparty-releases' }
+}
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly "javax:javaee-api:7.0"
-    compile "org.liquibase:liquibase-core:3.5.3"
     compile project(":api")
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.liquibase:liquibase-core:3.5.3"
+    compileOnly "javax:javaee-api:$javaeeApiVersion"
+
+    integTestCompile "junit:junit:4.12"
+    integTestCompile "org.apache.httpcomponents:httpclient:4.5.3"
+    integTestCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.1.0'
+    integTestCompile 'org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1'
+    integTestCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1'
+
+    integTestRuntime 'org.jboss.logging:jboss-logging:3.1.4.GA'
+    integTestRuntime 'org.wildfly:wildfly-arquillian-container-managed:8.2.1.Final'
 }
 
-task integrationTest(type: Test) {
-//    testClassesDir = sourceSets.integrationTest.output.classesDir
-//    classpath = sourceSets.integrationTest.runtimeClasspath
+import de.undercouch.gradle.tasks.download.Download
+task downloadWildfly(type: Download) {
+    src "http://download.jboss.org/wildfly/$wildflyVersion/$wildflyName"
+    dest "$rootDir/downloads/$wildflyName"
+    overwrite false
 }
 
-check.dependsOn integrationTest
-integrationTest.mustRunAfter test
+task installTestWildfly(type: Copy, dependsOn: downloadWildfly) {
+    from zipTree(downloadWildfly.dest)
+    into buildDir
+}
+
+task integTest(type: Test, dependsOn: installTestWildfly) {
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
+    environment 'JBOSS_HOME', "$buildDir/wildfly-$wildflyVersion"
+    systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
+}
+
+check.dependsOn integTest
+integTest.mustRunAfter test
