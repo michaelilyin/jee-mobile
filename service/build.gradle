@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'kotlin'
 apply plugin: 'war'
+//apply plugin: 'jacoco'
 
 ext.wildflyVersion = "10.1.0.Final"
 ext.wildflyName = "wildfly-${project.wildflyVersion}.zip"
@@ -37,6 +38,8 @@ dependencies {
     integTestCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.1.0'
     integTestCompile 'org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1'
     integTestCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1'
+    integTestCompile "com.jayway.jsonpath:json-path:2.2.0"
+//    integTestCompile 'org.jboss.arquillian.extension:arquillian-jacoco:1.0.0.Alpha7'
 
     integTestRuntime 'org.jboss.logging:jboss-logging:3.1.4.GA'
     integTestRuntime 'org.wildfly:wildfly-arquillian-container-managed:8.2.1.Final'

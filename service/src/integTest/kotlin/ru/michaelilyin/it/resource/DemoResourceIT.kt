@@ -1,5 +1,7 @@
-package ru.michaelilyin.resource.status
+package ru.michaelilyin.it.resource
 
+import com.jayway.jsonpath.Configuration
+import com.jayway.jsonpath.JsonPath
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.http.util.EntityUtils
@@ -10,9 +12,12 @@ import org.jboss.arquillian.test.api.ArquillianResource
 import org.jboss.shrinkwrap.api.ShrinkWrap
 import org.jboss.shrinkwrap.api.spec.WebArchive
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import ru.michaelilyin.Application
+import ru.michaelilyin.it.resourceDeployment
+import ru.michaelilyin.resource.StatusResource
 import java.net.URL
 
 
@@ -21,27 +26,29 @@ import java.net.URL
  * Created by Michael Ilyin on 19.02.2017.
  */
 @RunWith(Arquillian::class)
-class StatusResourceIT {
+class DemoResourceIT {
 
     companion object {
         @JvmStatic
         @Deployment
-        fun deployment(): WebArchive {
-            return ShrinkWrap.create(WebArchive::class.java)
-                .addClass(Application::class.java)
-                .addClass(StatusResource::class.java)
-        }
+        fun deployment(): WebArchive = resourceDeployment()
     }
 
     @Test
     @RunAsClient
-    fun test(@ArquillianResource base: URL) {
+    fun testGetDemos(@ArquillianResource base: URL) {
         val client = HttpClientBuilder.create().build()
         client.use {
-            val request = HttpGet(base.toURI().resolve("api/status"))
+            val request = HttpGet(base.toURI().resolve("api/demo"))
             val response = client.execute(request)
-            assertEquals(200, response.statusLine.statusCode)
-            assertEquals("OK", EntityUtils.toString(response.entity))
+            response.use {
+                assertEquals(200, response.statusLine.statusCode)
+
+                val json = JsonPath.parse(response.entity.content)
+
+                val length = json.read("$.length()", Int::class.java)
+                assertTrue(length > 0)
+            }
         }
     }
 }
