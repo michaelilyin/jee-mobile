@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+  web-api-service:
+    build:
+      context: ./service
+      args:
+        POSTGRES_HOST: database
+        POSTGRES_PORT: 5432
+        POSTGRES_DB: mobile
+        POSTGRES_USER: mobile
+        POSTGRES_PASSWORD: mobile
+        WILDFLY_ADMIN: admin
+        WILDFLY_PASSWORD: password
+    ports:
+    - "8080:8080"
+    - "9990:9990"
+    links:
+    - database
+    depends_on:
+    - database
+  database:
+    image: postgres:9.4.11-alpine
+    environment:
+      POSTGRES_DB: mobile
+      POSTGRES_USER: mobile
+      POSTGRES_PASSWORD: mobile

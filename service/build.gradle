@@ -12,8 +12,8 @@ ext.wildflyName = "wildfly-${project.wildflyVersion}.zip"
 sourceSets {
     integTest {
         java {
-            compileClasspath += main.output + main.compileClasspath //+ main.runtimeClasspath
-            runtimeClasspath += main.output + main.compileClasspath // + test.output
+            compileClasspath += main.output + main.compileClasspath
+            runtimeClasspath += main.output + main.compileClasspath
             srcDir file('src/integTest/kotlin')
         }
         resources.srcDir file('src/integTest/resources')
@@ -39,7 +39,7 @@ dependencies {
     integTestCompile 'org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1'
     integTestCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1'
     integTestCompile "com.jayway.jsonpath:json-path:2.2.0"
-//    integTestCompile 'org.jboss.arquillian.extension:arquillian-jacoco:1.0.0.Alpha9'
+    integTestCompile 'org.jboss.arquillian.extension:arquillian-jacoco:1.0.0.Alpha9'
     integTestCompile "org.jacoco:org.jacoco.agent:0.7.9"
 
 
@@ -70,7 +70,7 @@ task copyJacocoLib(type: Copy) {
 
 task integTest(type: Test, dependsOn: [installTestWildfly, copyJacocoLib]) {
     testClassesDir = sourceSets.integTest.output.classesDir
-    classpath = sourceSets.integTest.runtimeClasspath
+    classpath = sourceSets.integTest.runtimeClasspath + configurations.jacocoAgent
     environment 'JBOSS_HOME', "$buildDir/wildfly-$wildflyVersion"
     systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
 }
@@ -90,10 +90,6 @@ task jacocoIntegTestReport(type: JacocoReport, dependsOn: integTest) {
     sourceDirectories = files('./src/main/kotlin')
     executionData = files("$buildDir/jacoco/integTest.exec")
 }
-
-//sourceSets {
-//    integTest.runtimeClasspath += configurations.jacocoAnt
-//}
 
 check.dependsOn jacocoIntegTestReport
 integTest.mustRunAfter test

@@ -1,0 +1,3 @@
+module add --name=org.postgresql --resources=/tmp/psql-jdbc.jar --dependencies=javax.api,javax.transaction.api
+/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql, driver-module-name=org.postgresql, driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
+/subsystem=datasources/data-source=MobileDataSource:add(jndi-name=java:jboss/datasources/MobileDataSource, enabled=true, jta=true, user-name=${POSTGRES_USER}, password=${POSTGRES_PASSWORD}, driver-name=postgresql, connection-url=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}, use-java-context=true, use-ccm=true)
