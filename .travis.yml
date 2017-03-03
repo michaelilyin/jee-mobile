@@ -24,4 +24,4 @@ after_success:
   - export SERVICE=michaelilyin/jee-mobile-service
   - docker build -t $SERVICE:$COMMIT ./service
   - docker tag $SERVICE:$COMMIT $SERVICE:$TAG
-  - docker push $SERVICE
+  - docker push $SERVICE:$TAG
