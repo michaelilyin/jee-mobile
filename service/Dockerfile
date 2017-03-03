@@ -12,8 +12,8 @@ RUN curl -o /tmp/psql-jdbc.jar https://jdbc.postgresql.org/download/postgresql-9
 #RUN curl -o /tmp/postgis-jdbc.jar http://postgis.net/stuff/postgis-jdbc-2.1.3.jar
 ADD image/config.sh /tmp/
 ADD image/batch.cli /tmp/
-RUN sudo chmod a+rx /tmp/config.sh
-RUN sudo chmod a+rx /tmp/batch.cli
+RUN chmod o+rx /tmp/config.sh
+RUN chmod o+rx /tmp/batch.cli
 
 RUN /tmp/config.sh
 RUN rm -r /opt/jboss/wildfly/standalone/configuration/standalone_xml_history
