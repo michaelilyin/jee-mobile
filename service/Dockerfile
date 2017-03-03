@@ -1,5 +1,7 @@
 FROM jboss/wildfly
 
+RUN echo $POSTGRES_HOST
+
 ARG WILDFLY_ADMIN
 ARG WILDFLY_PASSWORD
 ARG POSTGRES_USER
@@ -7,6 +9,8 @@ ARG POSTGRES_PASSWORD
 ARG POSTGRES_HOST
 ARG POSTGRES_PORT
 ARG POSTGRES_DB
+
+RUN echo $POSTGRES_HOST
 
 RUN curl -o /tmp/psql-jdbc.jar https://jdbc.postgresql.org/download/postgresql-9.4-1201.jdbc41.jar
 #RUN curl -o /tmp/postgis-jdbc.jar http://postgis.net/stuff/postgis-jdbc-2.1.3.jar
