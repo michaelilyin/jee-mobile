@@ -22,6 +22,6 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   #SERVICE
   - export SERVICE=michaelilyin/jee-mobile-service
-  - docker build -t $SERVICE:$COMMIT ./service
+  - docker build -t $SERVICE:$COMMIT ./service --build-arg $WILDFLY_ADMIN --build-arg $WILDFLY_PASSWORD --build-arg $POSTGRES_USER --build-arg $POSTGRES_PASSWORD --build-arg $POSTGRES_HOST --build-arg $POSTGRES_PORT --build-arg $POSTGRES_DB
   - docker tag $SERVICE:$COMMIT $SERVICE:$TAG
   - docker push $SERVICE:$TAG
