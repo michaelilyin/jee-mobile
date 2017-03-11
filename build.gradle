@@ -1,5 +1,8 @@
 buildscript {
-    ext.kotlinVersion = '1.0.5'
+    ext {
+        kotlinVersion = '1.0.5'
+        javaeeApiVersion = '7.0'
+    }
 
     repositories {
         mavenCentral()
@@ -9,8 +12,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
-
-ext.javaeeApiVersion = '7.0'
 
 allprojects  {
     group = 'ru.michaelilyin'

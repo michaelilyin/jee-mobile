@@ -1,4 +1,4 @@
-package ru.michaelilyin
+package ru.michaelilyin.domain
 
 import javax.persistence.*
 

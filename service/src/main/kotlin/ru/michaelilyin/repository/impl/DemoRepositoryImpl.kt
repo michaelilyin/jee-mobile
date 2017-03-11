@@ -1,6 +1,6 @@
 package ru.michaelilyin.repository.impl
 
-import ru.michaelilyin.Demo
+import ru.michaelilyin.domain.Demo
 import ru.michaelilyin.repository.DemoRepository
 import javax.ejb.Stateless
 import javax.persistence.EntityManager

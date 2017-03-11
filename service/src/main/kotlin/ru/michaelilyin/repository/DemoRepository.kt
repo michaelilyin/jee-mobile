@@ -1,6 +1,6 @@
 package ru.michaelilyin.repository
 
-import ru.michaelilyin.Demo
+import ru.michaelilyin.domain.Demo
 import javax.ejb.Local
 import javax.ejb.Stateless
 import javax.enterprise.inject.Alternative

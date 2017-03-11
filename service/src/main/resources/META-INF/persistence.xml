@@ -7,10 +7,10 @@
     <persistence-unit name="MobileUnit" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/MobileDataSource</jta-data-source>
 
-        <class>ru.michaelilyin.Demo</class>
+        <class>ru.michaelilyin.domain.Demo</class>
 
         <properties>
-
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialec"/>
         </properties>
     </persistence-unit>
 </persistence>

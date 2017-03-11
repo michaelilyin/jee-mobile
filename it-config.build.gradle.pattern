@@ -1,0 +1,71 @@
+buildscript {
+    ext {
+        javaeeApiVersion = '7.0'
+    }
+}
+
+plugins {
+    id "de.undercouch.download" version "3.2.0"
+}
+
+import de.undercouch.gradle.tasks.download.Download
+
+subprojects {
+
+    ext {
+        wildflyVersion = "10.1.0.Final"
+        wildflyName = "wildfly-${project.wildflyVersion}.zip"
+    }
+
+//    repositories {
+//        maven { url 'https://repository.jboss.org/nexus/content/groups/public-jboss' }
+//        maven { url 'https://repository.jboss.org/nexus/content/repositories' }
+//        maven { url 'https://repository.jboss.org/nexus/content/repositories/thirdparty-releases' }
+//    }
+
+//    sourceSets {
+//        integTest {
+//            java {
+//                compileClasspath += main.output + main.compileClasspath
+//                runtimeClasspath += main.output + main.compileClasspath
+//                srcDir file('src/integTest/kotlin')
+//            }
+//            resources.srcDir file('src/integTest/resources')
+//        }
+//    }
+//
+//    dependencies {
+//        integTestCompile "junit:junit:4.12"
+//        integTestCompile "org.apache.httpcomponents:httpclient:4.5.3"
+//        integTestCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.1.0'
+//        integTestCompile 'org.jboss.arquillian:arquillian-bom:1.1.2.Final-wildfly-1'
+//        integTestCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.2.Final-wildfly-1'
+//        integTestCompile "com.jayway.jsonpath:json-path:2.2.0"
+//
+//        integTestRuntime 'org.jboss.logging:jboss-logging:3.1.4.GA'
+//        integTestRuntime 'org.wildfly:wildfly-arquillian-container-managed:8.2.1.Final'
+//        integTestRuntime "org.jacoco:org.jacoco.core:0.7.9"
+//    }
+//
+//    task downloadWildfly(type: Download) {
+//        src "http://download.jboss.org/wildfly/$wildflyVersion/$wildflyName"
+//        dest "$rootDir/downloads/$wildflyName"
+//        overwrite false
+//    }
+//
+//    task installTestWildfly(type: Copy, dependsOn: downloadWildfly) {
+//        from zipTree(downloadWildfly.dest)
+//        into buildDir
+//    }
+//
+//    task integTest(type: Test, dependsOn: installTestWildfly) {
+//        testClassesDir = sourceSets.integTest.output.classesDir
+//        classpath = sourceSets.integTest.runtimeClasspath
+//        environment 'JBOSS_HOME', "$buildDir/wildfly-$wildflyVersion"
+//        systemProperty 'java.util.logging.manager', 'org.jboss.logmanager.LogManager'
+//    }
+//
+//    check.dependsOn integTest
+//    integTest.mustRunAfter test
+
+}

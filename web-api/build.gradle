@@ -5,6 +5,5 @@ dependencies {
     compile project(":api")
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile "org.liquibase:liquibase-core:3.5.3"
     compileOnly "javax:javaee-api:$javaeeApiVersion"
 }

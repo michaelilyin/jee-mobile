@@ -1,4 +1,5 @@
 rootProject.name = 'application'
-include 'api'
-include 'service'
 
+include ':api'
+include ':service'
+include ':web-api'
