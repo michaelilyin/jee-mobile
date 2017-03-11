@@ -27,6 +27,6 @@ RUN rm -r /opt/jboss/wildfly/standalone/configuration/standalone_xml_history
 RUN /opt/jboss/wildfly/bin/add-user.sh -u ${WILDFLY_ADMIN} -p ${WILDFLY_PASSWORD} -e -cw
 
 ADD web-api/build/libs/*.war /opt/jboss/wildfly/standalone/deployments/ROOT.war
-ADD service/build/libs/*.war /opt/jboss/wildfly/standalone/deployments/service.war
+#ADD service/build/libs/*.war /opt/jboss/wildfly/standalone/deployments/service.war
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]

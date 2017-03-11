@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType
  * Created by Michael Ilyin on 17.02.2017.
  */
 @Path("/status")
+@Stateless
 @Produces(MediaType.APPLICATION_JSON)
 open class StatusResource {
 

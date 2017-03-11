@@ -3,6 +3,7 @@ apply plugin: 'war'
 
 dependencies {
     compile project(":api")
+    compile project(":service")
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compileOnly "javax:javaee-api:$javaeeApiVersion"
