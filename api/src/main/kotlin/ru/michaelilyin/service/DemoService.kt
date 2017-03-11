@@ -1,12 +1,12 @@
 package ru.michaelilyin.service
 
 import ru.michaelilyin.domain.Demo
-import javax.ejb.Remote
+import javax.ejb.Local
 
 /**
  * Created by micha on 11.03.2017.
  */
-@Remote
+@Local
 interface DemoService {
     fun getDemos(): Iterable<Demo>
 }
