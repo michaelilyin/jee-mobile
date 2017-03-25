@@ -8,6 +8,9 @@
         <jta-data-source>java:jboss/datasources/MobileDataSource</jta-data-source>
 
         <class>ru.michaelilyin.domain.Demo</class>
+        <class>ru.michaelilyin.domain.User</class>
+        <class>ru.michaelilyin.domain.Action</class>
+        <class>ru.michaelilyin.domain.TimeLog</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

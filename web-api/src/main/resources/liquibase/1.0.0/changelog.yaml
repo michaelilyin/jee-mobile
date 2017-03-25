@@ -1,0 +1,36 @@
+databaseChangeLog:
+
+- changeSet:
+    id: 2017-02-18_2259-create-demo-table
+    author: Michael Ilyin
+    context: dev
+    changes:
+    - sqlFile:
+        path: 2017-02-18_2259-create-demo-table.sql
+        relativeToChangelogFile: true
+
+- changeSet:
+    id: 2017-03-15_2304-time-manager-tables
+    author: Michael Ilyin
+    context: prod
+    changes:
+    - sqlFile:
+        path: 2017-03-15_2304-time-manager-tables.sql
+        relativeToChangelogFile: true
+    rollback:
+      sqlFile:
+        path: 2017-03-15_2304-rollback.sql
+        relativeToChangelogFile: true
+
+- changeSet:
+    id: 2017-03-15_2354-demo-data
+    author: Michael Ilyin
+    context: dev
+    changes:
+    - sqlFile:
+        path: 2017-03-15_2354-demo-data.sql
+        relativeToChangelogFile: true
+    rollback:
+      sqlFile:
+        path: 2017-03-15_2354-rollback.sql
+        relativeToChangelogFile: true

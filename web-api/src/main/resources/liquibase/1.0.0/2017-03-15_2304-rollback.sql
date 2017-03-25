@@ -1,0 +1,5 @@
+DROP INDEX IF EXISTS time_logs_user_id;
+
+DROP TABLE IF EXISTS time_logs;
+DROP TABLE IF EXISTS actions;
+DROP TABLE IF EXISTS users;

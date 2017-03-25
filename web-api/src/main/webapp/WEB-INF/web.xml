@@ -5,7 +5,7 @@
 
     <context-param>
         <param-name>liquibase.changelog</param-name>
-        <param-value>liquibase/db.changelog.xml</param-value>
+        <param-value>liquibase/db.changelog.yaml</param-value>
     </context-param>
 
     <context-param>

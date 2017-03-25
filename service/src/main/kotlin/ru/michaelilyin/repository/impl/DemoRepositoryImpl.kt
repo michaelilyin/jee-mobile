@@ -16,7 +16,9 @@ open class DemoRepositoryImpl : DemoRepository {
     private lateinit var entityManager: EntityManager
 
     override fun getDemos(): List<Demo> {
-        return entityManager.createNamedQuery(Demo.Query.selectAll, Demo::class.java).resultList
+        return entityManager
+            .createNamedQuery(Demo.Query.selectAll, Demo::class.java)
+            .resultList
     }
 
 }

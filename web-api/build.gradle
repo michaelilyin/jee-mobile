@@ -6,5 +6,6 @@ dependencies {
     compile project(":service")
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile 'org.yaml:snakeyaml:1.17'
     compileOnly "javax:javaee-api:$javaeeApiVersion"
 }
