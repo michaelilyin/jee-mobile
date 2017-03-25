@@ -18,8 +18,8 @@ CREATE TABLE time_logs (
     id BIGSERIAL,
     user_id BIGINT NOT NULL,
     action_id BIGINT NOT NULL,
-    time_begin TIMESTAMP NOT NULL,
-    time_end TIMESTAMP,
+    time_begin TIMESTAMP WITH TIME ZONE NOT NULL,
+    time_end TIMESTAMP WITH TIME ZONE,
     comment VARCHAR(512),
 
     PRIMARY KEY (id),

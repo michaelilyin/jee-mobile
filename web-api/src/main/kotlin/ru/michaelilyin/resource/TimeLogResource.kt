@@ -1,6 +1,7 @@
 package ru.michaelilyin.resource
 
 import ru.michaelilyin.domain.TimeLog
+import ru.michaelilyin.dto.TimeLogDTO
 import ru.michaelilyin.service.TimeLogService
 import javax.ejb.EJB
 import javax.ejb.Stateless
@@ -23,7 +24,19 @@ open class TimeLogResource {
 
     @GET
     @Path("/users/{id}/logs")
-    open fun getLogsForUser(@PathParam("id") id: Long): Iterable<TimeLog> {
-        return timeLogService.getTimeLogsForUser(id)
+    open fun getLogsForUser(@PathParam("id") id: Long): Iterable<TimeLogDTO> {
+        val logs = timeLogService.getTimeLogsForUser(id)
+        return logs.map {
+            TimeLogDTO(
+                id = it.id,
+                userId = it.user.id,
+                userName =  it.user.name,
+                actionId = it.action.id,
+                actionName = it.action.name,
+                timeBegin = it.timeBegin.toInstant().toEpochMilli(),
+                timeEnd = it.timeEnd?.toInstant()?.toEpochMilli(),
+                comment = it.comment
+            )
+        }
     }
 }
