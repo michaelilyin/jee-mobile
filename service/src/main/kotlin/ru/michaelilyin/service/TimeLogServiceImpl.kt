@@ -1,6 +1,7 @@
 package ru.michaelilyin.service
 
 import ru.michaelilyin.domain.TimeLog
+import ru.michaelilyin.domain.TimeTest
 import ru.michaelilyin.repository.TimeLogRepository
 import javax.ejb.Stateless
 import javax.inject.Inject
@@ -16,5 +17,9 @@ open class TimeLogServiceImpl : TimeLogService {
 
     override fun getTimeLogsForUser(userId: Long): List<TimeLog> {
         return timeLogRepository.getTimeLogsForUser(userId)
+    }
+
+    override fun getTimeTests(): List<TimeTest> {
+        return timeLogRepository.getTimeTests()
     }
 }

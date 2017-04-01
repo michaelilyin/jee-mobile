@@ -1,6 +1,7 @@
 package ru.michaelilyin.resource
 
 import ru.michaelilyin.domain.TimeLog
+import ru.michaelilyin.domain.TimeTest
 import ru.michaelilyin.dto.TimeLogDTO
 import ru.michaelilyin.service.TimeLogService
 import javax.ejb.EJB
@@ -27,5 +28,9 @@ open class TimeLogResource {
     open fun getLogsForUser(@PathParam("id") id: Long): Iterable<TimeLogDTO> {
         val logs = timeLogService.getTimeLogsForUser(id)
         return logs.map(::TimeLogDTO)
+    }
+
+    open fun getTimeTest(): Iterable<TimeTest> {
+        return timeLogService.getTimeTests().map {  }
     }
 }

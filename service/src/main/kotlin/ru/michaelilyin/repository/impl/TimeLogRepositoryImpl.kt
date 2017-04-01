@@ -1,6 +1,7 @@
 package ru.michaelilyin.repository.impl
 
 import ru.michaelilyin.domain.TimeLog
+import ru.michaelilyin.domain.TimeTest
 import ru.michaelilyin.repository.TimeLogRepository
 import javax.ejb.Stateless
 import javax.persistence.EntityManager
@@ -20,5 +21,9 @@ open class TimeLogRepositoryImpl : TimeLogRepository {
             .createNamedQuery(TimeLog.Query.logsForUser, TimeLog::class.java)
             .setParameter("userId", userId)
             .resultList
+    }
+
+    override fun getTimeTests(): List<TimeTest> {
+        return entityManager.createQuery("select tt from TimeTest tt", TimeTest::class.java).resultList
     }
 }
