@@ -1,0 +1,1 @@
+DROP INDEX time_logs_user_action_uniq;
