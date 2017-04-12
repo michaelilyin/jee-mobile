@@ -34,3 +34,12 @@ databaseChangeLog:
       sqlFile:
         path: 2017-03-15_2354-rollback.sql
         relativeToChangelogFile: true
+
+- changeSet:
+    id: 2017-04-12_2356-add-more-demo-data
+    author: Michael Ilyin
+    context: dev
+    changes:
+    - sqlFile:
+        path: 2017-04-12_2356-add-more-demo-data.sql
+        relativeToChangelogFile: true
